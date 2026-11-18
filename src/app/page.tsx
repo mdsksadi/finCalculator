@@ -11,10 +11,9 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -31,7 +30,6 @@ const calculators = [
       "See exactly what your dream home will cost each month before you commit. Adjust the numbers and understand where every dollar goes.",
     icon: House,
     href: "/mortgage-repayment-calculator",
-    live: true,
     features: [
       "Estimate your monthly repayment",
       "Experiment with interest rates and loan terms",
@@ -45,8 +43,7 @@ const calculators = [
     description:
       "Watch your money work for you. Discover how time, regular contributions, and a little compounding can add up to something big.",
     icon: TrendingUp,
-    href: undefined,
-    live: false,
+    href: "/compound-interest-calculator",
     features: [
       "Project how your savings grow over time",
       "See the power of compounding visually",
@@ -188,40 +185,36 @@ export default function Home() {
                 const Icon = calculator.icon;
 
                 return (
-                  <Card key={calculator.title}>
-                    <CardHeader>
-                      <span className="bg-muted text-foreground flex size-14 items-center justify-center rounded-2xl ring-1 ring-foreground/10">
-                        <Icon />
-                      </span>
-                      <CardAction>
-                        <Badge
-                          variant={calculator.live ? "default" : "outline"}
-                        >
-                          {calculator.live ? "Live" : "Coming soon"}
-                        </Badge>
-                      </CardAction>
-                      <p className="text-primary mt-4 text-xs font-semibold tracking-widest uppercase">
-                        {calculator.eyebrow}
-                      </p>
-                      <CardTitle>{calculator.title}</CardTitle>
-                      <CardDescription>
-                        {calculator.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="flex flex-col gap-3">
-                        {calculator.features.map((feature) => (
-                          <li key={feature} className="flex gap-3 text-sm">
-                            <Check className="text-primary mt-0.5 shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                    <CardFooter>
-                      {calculator.href ? (
-                        <Link
-                          href={calculator.href}
+                  <Link
+                    key={calculator.title}
+                    href={calculator.href}
+                    className="group block h-full rounded-xl outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+                  >
+                    <Card className="h-full transition-all group-hover:ring-2 group-hover:ring-foreground/20">
+                      <CardHeader>
+                        <span className="bg-muted text-foreground flex size-14 items-center justify-center rounded-2xl ring-1 ring-foreground/10">
+                          <Icon />
+                        </span>
+                        <p className="text-primary mt-4 text-xs font-semibold tracking-widest uppercase">
+                          {calculator.eyebrow}
+                        </p>
+                        <CardTitle>{calculator.title}</CardTitle>
+                        <CardDescription>
+                          {calculator.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="flex flex-col gap-3">
+                          {calculator.features.map((feature) => (
+                            <li key={feature} className="flex gap-3 text-sm">
+                              <Check className="text-primary mt-0.5 shrink-0" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                      <CardFooter>
+                        <span
                           className={buttonVariants({
                             variant: "outline",
                             className: "rounded-full",
@@ -229,19 +222,10 @@ export default function Home() {
                         >
                           Launch calculator
                           <ArrowRight data-icon="inline-end" />
-                        </Link>
-                      ) : (
-                        <Button
-                          variant="outline"
-                          disabled
-                          className="rounded-full"
-                        >
-                          Launch calculator
-                          <ArrowRight data-icon="inline-end" />
-                        </Button>
-                      )}
-                    </CardFooter>
-                  </Card>
+                        </span>
+                      </CardFooter>
+                    </Card>
+                  </Link>
                 );
               })}
             </div>

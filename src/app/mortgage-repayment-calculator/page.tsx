@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 
 import { MortgageCalculator } from "./mortgage-calculator";
@@ -18,22 +17,17 @@ export default function Page() {
     <main id="top" className="flex-1">
       <section className="border-b bg-muted/30 py-14">
         <div className="mx-auto w-full max-w-6xl px-6">
-          <div className="flex items-center justify-between gap-4">
-            <Link
-              href="/#calculators"
-              className={buttonVariants({
-                variant: "ghost",
-                size: "sm",
-                className: "-ml-3 rounded-full",
-              })}
-            >
-              <ArrowLeft data-icon="inline-start" />
-              All calculators
-            </Link>
-            <Badge variant="secondary" className="rounded-full">
-              Live
-            </Badge>
-          </div>
+          <Link
+            href="/#calculators"
+            className={buttonVariants({
+              variant: "ghost",
+              size: "sm",
+              className: "-ml-3 rounded-full",
+            })}
+          >
+            <ArrowLeft data-icon="inline-start" />
+            All calculators
+          </Link>
 
           <div className="mt-10 max-w-3xl">
             <p className="text-primary text-xs font-semibold tracking-widest uppercase">
