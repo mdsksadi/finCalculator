@@ -94,6 +94,8 @@ const steps = [
   },
 ];
 
+const API_KEY = "afdfdkfdkfjdfjdfjdlfjdfjdlfjdl";
+
 export default function Home() {
   return (
     <div
