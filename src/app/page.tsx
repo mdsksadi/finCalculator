@@ -1,6 +1,6 @@
+import Link from "next/link";
 import {
   ArrowRight,
-  ChartNoAxesCombined,
   Check,
   House,
   ShieldCheck,
@@ -30,6 +30,8 @@ const calculators = [
     description:
       "See exactly what your dream home will cost each month before you commit. Adjust the numbers and understand where every dollar goes.",
     icon: House,
+    href: "/mortgage-repayment-calculator",
+    live: true,
     features: [
       "Estimate your monthly repayment",
       "Experiment with interest rates and loan terms",
@@ -43,6 +45,8 @@ const calculators = [
     description:
       "Watch your money work for you. Discover how time, regular contributions, and a little compounding can add up to something big.",
     icon: TrendingUp,
+    href: undefined,
+    live: false,
     features: [
       "Project how your savings grow over time",
       "See the power of compounding visually",
@@ -97,53 +101,8 @@ export default function Home() {
   return (
     <div
       id="top"
-      className="flex min-h-screen flex-col bg-background font-sans text-foreground"
+      className="flex min-h-screen flex-1 flex-col bg-background font-sans text-foreground"
     >
-      <header className="bg-background/80 sticky top-0 z-50 border-b backdrop-blur-md">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
-          <a
-            href="#top"
-            className="flex items-center gap-2.5"
-            aria-label="FinCalc home"
-          >
-            <span className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-xl">
-              <ChartNoAxesCombined />
-            </span>
-            <span className="text-lg font-bold tracking-tight">
-              Fin<span className="text-primary">Calc</span>
-            </span>
-          </a>
-
-          <nav
-            className="text-muted-foreground hidden items-center gap-8 text-sm font-medium md:flex"
-            aria-label="Main navigation"
-          >
-            <a
-              className="transition-colors hover:text-foreground"
-              href="#calculators"
-            >
-              Calculators
-            </a>
-            <a className="transition-colors hover:text-foreground" href="#why">
-              Why FinCalc
-            </a>
-            <a className="transition-colors hover:text-foreground" href="#how">
-              How it works
-            </a>
-          </nav>
-
-          <a
-            href="#calculators"
-            className={buttonVariants({
-              size: "sm",
-              className: "rounded-full",
-            })}
-          >
-            Get started
-          </a>
-        </div>
-      </header>
-
       <main className="flex-1">
         <section className="relative overflow-hidden">
           <div className="mx-auto max-w-4xl px-6 py-24 text-center sm:py-32">
@@ -235,7 +194,11 @@ export default function Home() {
                         <Icon />
                       </span>
                       <CardAction>
-                        <Badge variant="outline">Coming soon</Badge>
+                        <Badge
+                          variant={calculator.live ? "default" : "outline"}
+                        >
+                          {calculator.live ? "Live" : "Coming soon"}
+                        </Badge>
                       </CardAction>
                       <p className="text-primary mt-4 text-xs font-semibold tracking-widest uppercase">
                         {calculator.eyebrow}
@@ -256,14 +219,27 @@ export default function Home() {
                       </ul>
                     </CardContent>
                     <CardFooter>
-                      <Button
-                        variant="outline"
-                        disabled
-                        className="rounded-full"
-                      >
-                        Launch calculator
-                        <ArrowRight data-icon="inline-end" />
-                      </Button>
+                      {calculator.href ? (
+                        <Link
+                          href={calculator.href}
+                          className={buttonVariants({
+                            variant: "outline",
+                            className: "rounded-full",
+                          })}
+                        >
+                          Launch calculator
+                          <ArrowRight data-icon="inline-end" />
+                        </Link>
+                      ) : (
+                        <Button
+                          variant="outline"
+                          disabled
+                          className="rounded-full"
+                        >
+                          Launch calculator
+                          <ArrowRight data-icon="inline-end" />
+                        </Button>
+                      )}
                     </CardFooter>
                   </Card>
                 );
@@ -349,22 +325,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <footer>
-        <Separator />
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm text-muted-foreground sm:flex-row">
-          <div className="flex items-center gap-2.5">
-            <span className="bg-primary text-primary-foreground flex size-9 items-center justify-center rounded-xl">
-              <ChartNoAxesCombined />
-            </span>
-            <span className="text-foreground font-semibold">
-              Fin<span className="text-primary">Calc</span>
-            </span>
-          </div>
-          <p>Simple tools for smarter financial decisions.</p>
-          <p>© 2026 FinCalc. Calculators coming soon.</p>
-        </div>
-      </footer>
     </div>
   );
 }
