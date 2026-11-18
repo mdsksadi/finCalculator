@@ -22,8 +22,6 @@ export const metadata: Metadata = {
     "Free mortgage repayment and compound interest calculators to help you plan your home and grow your savings with confidence.",
 };
 
-const password = "thisismypassword";
-
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
